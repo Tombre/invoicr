@@ -1,0 +1,87 @@
+/*
+Sprites
+-----------------------------------------------------*/
+
+/* Variables */
+
+$icons-spacing: 5px;
+$icons-sprite-dimensions: true; //if using the above classes
+
+/* Mixins */
+
+@import "icons/*.png";
+@include all-icons-sprites;
+
+@mixin icon($file) {
+	@include inline-block;
+	@extend .icons-#{$file};
+}
+
+[class*="icons"] {
+	@include inline-block;
+}
+
+/*
+Tools
+-----------------------------------------------------*/
+
+$vendorProfix: -webkit- -khtml- -moz- -ms- -o-;
+
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+@mixin rem($key,$px) {
+ $base_unit : strip-units($base_font_size);
+ $rem : strip-units($px/$base_unit);
+  #{$key}: $px;
+  #{$key}: #{$rem}rem;
+}
+
+
+/*
+Layout
+-----------------------------------------------------*/
+
+/* Variables */
+
+$global-width: 1070px;
+$global-padding: 25px;
+$global-content-padding: $global-padding + 45px; 
+
+$small-break-point:495px;
+
+$red: #e51818;
+$orange : #f48e3b;
+$grey : #424242;
+$dark  : #313131;
+$yellow : #fbbf2f;
+$light : #424242;
+$cream: #daceaa;
+$light-green: #16e2b4;
+$green: #58a190;
+
+$hr: 1px solid #f6b4a0;
+
+/*
+Typography
+-----------------------------------------------------*/
+
+
+//Fonts
+$main-font: "Gotham Rounded", Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+$sub-font: "Gotham Rounded", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+
+//Sizing
+$base-font-size: 16px;
+$base-line-height: 24px;
+$relative-font-sizing: true;
+
+/*
+Forms
+-----------------------------------------------------*/
+
+
+/*
+Animation
+-----------------------------------------------------*/

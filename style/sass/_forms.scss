@@ -1,0 +1,66 @@
+/*
+Imports
+-----------------------------------------------------*/
+
+
+/*
+Variables
+-----------------------------------------------------*/
+
+// Any specific variables should go here, if not a part
+// of the global variables. Globals should be placed
+// in the base file 
+
+$reg-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.35);
+$drop-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.25);
+
+/*
+Mixins
+-----------------------------------------------------*/
+
+// Any specific mixins should go here, if not a part
+// of the global mixins. Globals should be placed
+// in the base file
+
+@mixin btn-base() {
+	@include inline-block;
+	@include single-transition(all, 0.2s, ease-out);
+}
+
+@mixin btn($btnColour:white, $textColour:grey) {
+	@include btn-base();
+	color: $textColour;
+	background-color: $btnColour;
+	padding: 8px 18px 8px 18px;
+	@include border-radius(6px);
+	&:hover {
+		@include box-shadow($reg-shadow);
+	}
+}
+
+@mixin outline-btn($btnColour:white, $textColour:grey) {
+	@include btn-base();
+	color: $textColour;
+	background-color: none;
+	border: 2px solid $btnColour;
+	padding: 9px 22px;
+	@include border-radius(6px);
+	
+	&:hover {
+	 	@include box-shadow($drop-shadow);
+	 	@include text-shadow($drop-shadow);
+	 	@include translateY(-3px);
+	}	
+}
+
+@mixin small-btn($textColour:grey) {
+	@include btn-base();
+	color: $textColour;
+}
+
+
+
+/*
+Styles
+-----------------------------------------------------*/
+

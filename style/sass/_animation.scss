@@ -1,0 +1,94 @@
+/*
+Imports
+-----------------------------------------------------*/
+
+
+
+/*
+Variables
+-----------------------------------------------------*/
+
+// Any specific variables should go here, if not a part
+// of the global variables. Globals should be placed
+// in the base file 
+
+/*
+Mixins
+-----------------------------------------------------*/
+
+// Any specific mixins should go here, if not a part
+// of the global mixins. Globals should be placed
+// in the base file
+
+
+// @include animation(test, 0.2s, ease, 0s, 1, normal, forwards);
+@mixin animation($name, $duration:0.2s, $timing:ease, $delay:0s, $iteration:1, $direction:normal, $fillMode:forwards) {
+	@include experimental(animation,$name $duration $timing $delay $iteration $direction);
+	@include experimental(animation-fill-mode, $fillMode);	
+}
+
+@mixin keyframes($animationName) {
+	@-webkit-keyframes #{$animationName} {
+		@content; }
+	@-khtml-keyframes #{$animationName} {
+		@content; }
+	@-moz-keyframes #{$animationName} {
+		@content; }
+	@-ms-keyframes #{$animationName} {
+		@content; }
+	@-o-keyframes #{$animationName} {
+		@content; }
+	@keyframes #{$animationName} {
+		@content; }
+}
+
+/*
+Styles
+-----------------------------------------------------*/
+
+@include keyframes(fadeUp) {
+  0% {
+    @include opacity(0);
+    @include transform(translateY(40px));
+  }
+  100% {
+    @include opacity(1);
+    @include transform(translateY(0));
+  }
+}
+
+@include keyframes(spinUp) {
+	0% {
+		@include transform(translateY(70px) rotateY(0deg));
+		@include opacity(0);
+	}
+	70% {
+		@include transform(rotateY(180deg));
+	}
+	100% {
+		@include transform(translateY(0) rotateY(180deg));
+		@include opacity(1);
+	}
+}
+
+@include keyframes(menu) {
+	0% {
+		@include opacity(0);
+		@include transform(translateZ(-450px) translateY(25px) rotateX(35deg));
+	}
+	100% {
+		@include opacity(1);
+		@include transform(translateY(0) rotateX(0deg) scale(1));
+	}
+}
+
+.text-animate {
+	@include inline-block;
+	overflow: hidden; 
+}
+
+%menu-animation {
+	@include transform-origin(top);
+	@include transform-style(preserve-3d);
+	@include backface-visibility(visible);
+}

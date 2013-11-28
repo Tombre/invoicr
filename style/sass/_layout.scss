@@ -1,0 +1,259 @@
+/*
+Imports
+-----------------------------------------------------*/
+
+
+
+/*
+Variables
+-----------------------------------------------------*/
+
+// Any specific variables should go here, if not a part
+// of the global variables. Globals should be placed
+// in the base file 
+
+$mediaSize-small : 612px;
+$mediaSize-large : 612px;
+
+/*
+Mixins
+-----------------------------------------------------*/
+
+// Any specific mixins should go here, if not a part
+// of the global mixins. Globals should be placed
+// in the base file
+
+@mixin center-abs() {
+	position: absolute;
+	left: 0; right: 0; bottom: 0; top: 0;
+	margin: auto; 
+}
+
+@mixin center-abs-top { @include center-abs(); bottom: auto; }
+@mixin center-abs-right { @include center-abs(); left: auto; }
+@mixin center-abs-bottom { @include center-abs(); top: auto; }
+@mixin center-abs-left { @include center-abs(); right: auto; }
+
+@mixin vert-center($height) {
+	position: absolute;
+	left: 0; top: 50%;
+	margin: (($height/2)*-1) 0 0 0;
+}
+
+@mixin hr() {
+	border-top: $hr;
+}
+
+@mixin square($size) {
+	width: $size;
+	height: $size;
+}
+
+@mixin fullscreen() {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+/* 
+
+# MAKE A RESPONSIVE MODAL
+
+*/
+
+@mixin modal($max-dimensions) {
+	display: none;
+	
+}
+
+@mixin modal-responsive(
+	$max-dimensions, /* max-width min-width max-height min-height; or max-width/max-height */
+	$background-color: white,
+	$position-type: fixed,
+	$padding: 50px,
+	$overlay: (black /* color */ 0.8 /* opacity */),
+	$animationType : 'fade'
+) {
+	
+	display: none;
+		
+	.overlay {
+		display: block;
+		position: fixed;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background-color: nth($overlay, 1);
+		@include opacity(0);
+		@include transition(all 20s ease-out);
+	}
+	
+	&.open {
+		@if $animationType == 'fade' {
+			.modal-content {			
+				-webkit-animation: fade 0.2s ease-out 0 normal;
+				-webkit-animation-fill-mode: forwards;
+			}
+		}
+		.overlay {
+			@include opacity(nth($overlay, 2));	
+		}
+	}
+	
+	.modal-content {
+		position: relative;
+		z-index: 2;
+		padding: $padding;
+		background-color: $background-color;
+		position: $position-type;
+		top: 0; left: 0; bottom: 0; right: 0;
+		margin: auto;
+		overflow: auto;
+		z-index: 99990;
+		
+		$axis: "width","height";
+	
+		@each $axi in $axis {
+			$index: index($axis, $axi);
+			@if length($max-dimensions) == 4 {
+				max-#{$axi}: nth($max-dimensions, ($index)); 
+				min-#{$axi}: nth($max-dimensions, ($index + 1));
+			} @else if length($max-dimensions) == 2 {
+				max-#{$axi}: nth($max-dimensions, ($index));
+			}
+		}		
+	}
+	
+	.close-btn {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		@include inline-block();
+		@extend .icons-exit;
+	}
+	
+}
+
+@mixin btn-bordered($width, $height, $icon-width, $colour) {
+	border: 3px solid $colour;
+	color: $colour;
+	display: inline-block;
+	padding: $height ($width + ($icon-width) * 1.4) ($height - 2) $width;
+}
+
+@mixin grid($childElement, $number:4) {
+	
+	@include pie-clearfix();
+	
+	#{$childElement} {
+		float: left;
+		width: (100% / $number);
+		@include box-sizing('border-box');
+	}
+	
+}
+
+@mixin grid-container() {}
+
+@mixin grid-element() {}
+
+/*
+Styles
+-----------------------------------------------------*/
+
+%hidden {
+	visibility: hidden;
+	display: none;
+}
+
+.modal {
+	@include modal-responsive(
+		$max-dimensions:20% 40%,
+		$background-color: white,
+		$position-type: fixed,
+		$padding: 50px
+	);
+	@include border-radius(3px);
+}
+
+.media {
+	width: $mediaSize-small;
+	margin: 0 auto;
+}
+
+
+.round-photo {
+	$boxsize : 80px;
+	@include square($boxsize);
+	@include border-radius($boxsize);
+	overflow: hidden;
+	position: relative;
+	
+	img {
+		/* position in the center	*/
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;
+		margin: auto;
+	}
+}
+
+.button-border {
+	$height: 13px;
+	$width: 22px;
+	$icon-width:23px;
+	$colour: white;
+	$alt-colour: $green;
+
+	@include btn-bordered($width, $height, $icon-width, $colour);
+	
+	@include border-radius(6px);
+	@include transition(all 0.2s ease-out);
+	
+	@include font-size(13px);
+	@include rem(line-height,19px);
+	text-transform: uppercase;
+	font-weight: bold;
+	position: relative;
+	
+	svg {
+		@include center-abs();
+		left: auto;
+		margin-right: $width - ($icon-width/2.6);
+		
+		g.oval use {
+			@include transition(all 0.2s ease-out);
+		 	stroke:$colour;
+	 	}
+	 	path {
+		 	fill:$colour;
+		 	@include transition(all 0.2s ease-out);
+	 	}
+	}
+	
+	&:hover {
+		background-color: $colour;
+		color: $alt-colour;
+		padding: $height ($width + ($icon-width) * 1.4 + 10) ($height - 2) ($width + 10);
+		
+		svg g.oval use {
+		 	stroke:$alt-colour;
+	 	}
+	 	svg path {
+		 	fill:$alt-colour;
+	 	}
+	}
+}
+
+.structure-padded {
+	@media all and (min-width: 973px) {
+		padding: 0 $global-content-padding 0 $global-content-padding;	
+	}
+	@media all and (max-width: 972px) {
+		padding: 0 $global-padding 0 $global-padding;	
+	}
+}
