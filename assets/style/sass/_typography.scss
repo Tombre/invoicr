@@ -8,18 +8,10 @@ Imports
 Variables
 -----------------------------------------------------*/
 
-// Any specific variables should go here, if not a part
-// of the global variables. Globals should be placed
-// in the base file 
-
 
 /*
 Mixins
 -----------------------------------------------------*/
-
-// Any specific mixins should go here, if not a part
-// of the global mixins. Globals should be placed
-// in the base file
 
 
 @mixin set-font($fam:$main-font, $fsize:$base-font-size, $lineHeight:$base-line-height) {
@@ -63,7 +55,6 @@ p {
 	
 	strong {
 		font-weight: bold;
-		color: $dark;
 	}
 	
 	a {
@@ -74,65 +65,18 @@ p {
 
 h1 {
 	@include set-font($fam:$main-font, $fsize:95px, $lineHeight:78px);
-	color: white;
-	font-weight: bold;
-	margin: 0;
-	position: relative;
-	left: -3px;
-	@media all and (max-width: 888px) {
-		@include font-size(75px);
-		@include line-height(70px);
-	}
-	@media all and (max-width: $small-break-point) {
-		@include font-size(45px);
-		@include line-height(40px);
-	}
+	color: red;
 }
 
 
 h2 {
 	@include set-font($fam:$main-font, $fsize:58px, $lineHeight:58px);
-	color: $light-green;
-	font-weight: bold;
-	margin: 0;
-	@media all and (max-width: 888px) {
-		@include font-size(38px);
-		@include line-height(35px);
-	}
-	@media all and (max-width: $small-break-point) {
-		@include font-size(27px);
-		@include line-height(24px);
-	}
 }
 
 h3 {
-	margin: 13px 0;
-	font-weight: bold;
 	@include set-font($fam:$main-font, $fsize:16px, $lineHeight:20px);
-	color: white;
 }
 
-
-aside {
-	@include set-font($fam:$main-font, $fsize:13px, $lineHeight:($base-line-height * 0.7));
-	color: white;
-	font-weight: bold;
-}
-
-.small-menu-link {
-	font-weight: bold;
-	text-transform: uppercase;
+%small-menu-link {
 	@include font-size(16px);
 }
-
-span.small {
-	font-weight: normal;
-	@include font-size(13px);
-}
-
-.support-info {
-}
-
-li {
-}
-

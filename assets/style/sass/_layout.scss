@@ -134,7 +134,7 @@ Mixins
 		top: 15px;
 		right: 15px;
 		@include inline-block();
-		@extend .icons-exit;
+		// add an exit button
 	}
 	
 }
@@ -202,7 +202,7 @@ Styles
 	}
 }
 
-.button-border {
+%button-border {
 	$height: 13px;
 	$width: 22px;
 	$icon-width:23px;
@@ -246,14 +246,5 @@ Styles
 	 	svg path {
 		 	fill:$alt-colour;
 	 	}
-	}
-}
-
-.structure-padded {
-	@media all and (min-width: 973px) {
-		padding: 0 $global-content-padding 0 $global-content-padding;	
-	}
-	@media all and (max-width: 972px) {
-		padding: 0 $global-padding 0 $global-padding;	
 	}
 }
