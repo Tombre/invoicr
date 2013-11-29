@@ -45,21 +45,23 @@ Layout
 
 /* Variables */
 
-$global-width: 1070px;
-$global-padding: 25px;
-$global-content-padding: $global-padding + 45px; 
+$global-width: 1024px;
+$global-padding: 26px;
 
 $small-break-point:495px;
 
 $red: #e51818;
 $orange : #f48e3b;
-$grey : #424242;
-$dark  : #313131;
+$grey : #6b6b6b;
+$dark  : #4f4f4f;
 $yellow : #fbbf2f;
-$light : #424242;
+$light : #e7e7e7;
 $cream: #daceaa;
 $light-green: #16e2b4;
-$green: #58a190;
+$green: #4ec78c;
+$dark-green: darken($green, 10%);
+$blue: #7f92a1;
+$dark-blue: #333b42;
 
 $hr: 1px solid #f6b4a0;
 
