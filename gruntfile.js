@@ -56,12 +56,6 @@ module.exports = function(grunt) {
       options: {
         watchTask: true
       }
-    },
-
-    // creates a simple connect webserver to delelop on
-
-    connect: {
-      uses_defaults: {}
     }
   });
 
@@ -70,10 +64,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-browser-sync');
-  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Register the default tasks. Run them when "grunt" is run 
-  grunt.registerTask('default', ['connect','browser_sync','watch']);
+  grunt.registerTask('default', ['browser_sync','watch']);
   grunt.registerTask('build', ['compass']);
 
 };
